@@ -36,9 +36,9 @@ public class FooController {
     }
 
     @RequestMapping(value = "foos/{fooId}/bars/insert", method = RequestMethod.POST)
-    public int insertBar(@PathVariable("fooId") int fooId, @RequestBody Bar bar, @RequestParam("fromIndex") int fromIndex) {
+    public int insertBar(@PathVariable("fooId") int fooId, @RequestBody List<Bar> bars, @RequestParam("fromIndex") int fromIndex) {
         Foo one = repository.findOne(fooId);
-        one.getBars().add(fromIndex, bar);
+        one.getBars().addAll(fromIndex, bars);
         repository.save(one);
         return 1;
     }
